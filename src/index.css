@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-omega-softGray text-omega-charcoal dark:bg-omega-charcoal dark:text-omega-softGray antialiased transition-colors duration-500;
+    font-family: 'Cairo', sans-serif;
+  }
+}
+
+@layer components {
+  /* Premium Glass System */
+  .glass-panel {
+    @apply bg-white/70 dark:bg-omega-darkGray/70 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-xl;
+  }
+  .glass-nav {
+    @apply bg-white/80 dark:bg-omega-charcoal/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    @apply relative overflow-hidden bg-omega-red text-white px-6 py-3 rounded-2xl font-bold shadow-[0_8px_20px_rgba(227,30,36,0.25)] hover:shadow-[0_12px_25px_rgba(227,30,36,0.4)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2;
+  }
+  .btn-outline {
+    @apply px-6 py-3 rounded-2xl font-bold border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-omega-red hover:text-omega-red dark:hover:text-omega-red transition-all duration-300;
+  }
+}
+
+/* Background Noise Texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
