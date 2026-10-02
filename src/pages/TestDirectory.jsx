@@ -15,9 +15,9 @@ export default function TestDirectory() {
     return matchesSearch && matchesCategory;
   });
 
-  const handleBookNow = () => {
+ const handleBookNow = () => {
     setSelectedTest(null);
-    navigate('/#booking');
+    navigate('/booking'); // تم التعديل هنا
   };
 
   return (

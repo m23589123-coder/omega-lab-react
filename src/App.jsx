@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { ToastProvider } from './components/ui/ToastContext'; // استدعاء المزود
+import { ToastProvider } from './components/ui/ToastContext';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -10,18 +10,33 @@ import FloatingActions from './components/ui/FloatingActions';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
+
   useEffect(() => {
-    if (hash) {
+    // إذا كان الرابط هو صفحة الحجز، انزل برفق لقسم الحجز
+    if (pathname === '/booking' || hash === '#booking') {
+      setTimeout(() => {
+        const element = document.getElementById('booking');
+        if (element) {
+          // حساب المسافة لترك مساحة لشريط التنقل العائم (100 بكسل)
+          const y = element.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 150);
+    } 
+    else if (hash) {
       setTimeout(() => {
         const element = document.getElementById(hash.replace('#', ''));
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const y = element.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
-      }, 100);
-    } else {
+      }, 150);
+    } 
+    else {
       window.scrollTo(0, 0);
     }
   }, [pathname, hash]);
+
   return null;
 }
 
@@ -49,6 +64,8 @@ function App() {
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
+              {/* السطر التالي يحل مشكلة 404 لزر الحجز */}
+              <Route path="/booking" element={<Home />} /> 
               <Route path="/directory" element={<TestDirectory />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
